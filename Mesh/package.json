@@ -21,6 +21,7 @@
     "**/*.{json,css,md}": "prettier --write"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.10",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -29,6 +30,7 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-import": "^2.31.0",
@@ -40,8 +42,10 @@
     "globals": "^16.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
+    "postcss": "^8.5.6",
     "prettier": "^3.5.3",
     "simple-git-hooks": "^2.13.0",
+    "tailwindcss": "^4.1.10",
     "vite": "^6.3.5"
   }
 }
