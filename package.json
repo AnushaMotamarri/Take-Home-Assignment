@@ -15,7 +15,8 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "**/*.{json,css,md}": "prettier --write"
+    "**/*.{json,css,md}": "prettier --write",
+    "*.{js,jsx}": "eslint --cache --fix"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.10",
