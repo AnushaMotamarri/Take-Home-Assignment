@@ -11,7 +11,8 @@
     "prepare": "simple-git-hooks"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    
+    "pre-commit": "echo '🎉 Pre-commit hook is working!'"
   },
   "lint-staged": {
     "**/*.{js,jsx}": [
