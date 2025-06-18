@@ -3,6 +3,8 @@ import routes from './routes.jsx';
 import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from './rtkQuery/store';
 function AppRoutes({ theme, setTheme }) {
   const element = useRoutes(
     routes.map(route =>
@@ -26,9 +28,11 @@ function App() {
   }, [theme]);
 
   return (
-    <Router>
-      <AppRoutes theme={theme} setTheme={setTheme} />
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <AppRoutes theme={theme} setTheme={setTheme} />
+      </Router>
+    </Provider>
   );
 }
 

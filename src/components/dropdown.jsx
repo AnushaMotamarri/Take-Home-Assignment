@@ -1,6 +1,7 @@
 // VirtualizedSelect.js
 import React from 'react';
 import AsyncSelect from 'react-select/async';
+import Select from 'react-select';
 
 const CustomOption = props => {
   const { data, innerRef, innerProps } = props;
@@ -18,17 +19,27 @@ const CustomOption = props => {
   );
 };
 
-const Dropdown = ({ options, loadOptions }) => {
+const Dropdown = ({ label, isAsync, options, loadOptions, onChange }) => {
   return (
     <div className="w-[300px] p-[10px]">
-      <AsyncSelect
-        cacheOptions
-        defaultOptions={options}
-        loadOptions={loadOptions}
-        getOptionLabel={opt => opt.name}
-        getOptionValue={opt => opt.id}
-        components={{ Option: CustomOption }}
-      />
+      {label && (
+        <label>
+          <b>{label}:</b>
+        </label>
+      )}
+      {isAsync ? (
+        <AsyncSelect
+          cacheOptions
+          defaultOptions={options}
+          loadOptions={loadOptions}
+          getOptionLabel={opt => opt.name}
+          getOptionValue={opt => opt.id}
+          onChange={onChange}
+          components={{ Option: CustomOption }}
+        />
+      ) : (
+        <Select options={options} onChange={onChange} />
+      )}
     </div>
   );
 };

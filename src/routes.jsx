@@ -1,11 +1,11 @@
-import Home from './view/home';
+import CryptoAssetTracker from './view/cryptoAssetTracker';
 import Layout from './view/layout';
 
 const routes = [
   {
     path: '/',
     element: <Layout />,
-    children: [{ path: '', element: <Home /> }],
+    children: [{ path: '', element: <CryptoAssetTracker /> }],
   },
 ];
 
