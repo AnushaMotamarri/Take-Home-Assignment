@@ -36,7 +36,7 @@ describe('CryptoSelect', () => {
     await userEvent.click(ethOption);
     expect(handleChange).toHaveBeenCalledWith(
       expect.objectContaining({ symbol: 'eth' }),
-      expect.objectContaining({ action: 'select-option' }) // optional
+      expect.objectContaining({ action: 'select-option' })
     );
     
       });
@@ -48,17 +48,16 @@ describe('CryptoSelect', () => {
         const handleChange = vi.fn();
         render(<Dropdown placeholder="Select" options={[]} onChange={handleChange} />);
       
-        // nothing selected
         expect(handleChange).not.toHaveBeenCalled();
       });
       it('does not crash if onChange is not provided', async () => {
-        render(<Dropdown isAsync placeholder="Select" options={[]} />); // no onChange
+        render(<Dropdown isAsync placeholder="Select" options={[]} />); 
         const input = screen.getByTestId('crypto-select');
-        await userEvent.click(input); // simulate open
+        await userEvent.click(input);
         expect(input).toBeInTheDocument();
       });
       it('renders option even if image or symbol is missing', async () => {
-        const options = [{ id: 'btc', name: 'Bitcoin' }]; // no image or symbol
+        const options = [{ id: 'btc', name: 'Bitcoin' }]; 
         render(<Dropdown isAsync options={options} onChange={vi.fn()} placeholder="Select coin" />);
       
         const input =  screen.getByTestId('crypto-select');
@@ -77,8 +76,8 @@ describe('CryptoSelect', () => {
           />
         );
       
-        const input = screen.getByRole('combobox'); // works for react-select input
-        await userEvent.type(input, 'eth'); // 👈 triggers loadOptions
+        const input = screen.getByRole('combobox'); 
+        await userEvent.type(input, 'eth'); 
       
         expect(loadOptions).toHaveBeenCalledWith('eth', expect.any(Function));
       });
