@@ -31,7 +31,7 @@ cd Take-Home-Assignment
 
 ```bash
 npm install
-
+```
 
 ### 3. Getting Started
 
