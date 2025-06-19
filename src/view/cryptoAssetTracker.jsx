@@ -3,7 +3,7 @@ import Dropdown from '../components/dropdown';
 import { useCoinsInfo } from '../hooks/useCoinsInfo';
 import CryptoChartView from './cryptoChartView';
 import { metricsDropdownOptions, timeRangeDropdownOptions } from './enums';
-import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
+import Toast from '../components/toastMessage';
 function CryptoAssetTracker() {
   const {
     topCoins,
@@ -23,7 +23,6 @@ function CryptoAssetTracker() {
     selectedMetricInfo,
     selectedTimeRange,
   } = useCoinsInfo();
-
   return (
     <div>
       <h2 className="text-xl p-[10px] text-text-color">
@@ -31,10 +30,11 @@ function CryptoAssetTracker() {
       </h2>
       {loading ? (
         <div>Loading...</div>
-      ) : error ? (
-        <div>{error}</div>
       ) : (
         <div>
+          <div>
+            <Toast message={error} type="error" />
+          </div>
           <div className="flex gap-6">
             <Dropdown
               isAsync

@@ -8,17 +8,12 @@ export default function CryptoChart({
   asset2Label = '',
   selectedMetric,
 }) {
-  console.log(chartData1, chartData2, selectedMetric);
   // Merge chart data safely
   const mergedData = useMemo(() => {
     return chartData1?.map((entry, i) => ({
       time: entry.time,
       asset1Price: entry[selectedMetric?.value],
-      // asset1Volume: entry.volume,
-      // asset1MarketCap: entry.marketCap,
       asset2Price: chartData2?.[i]?.[selectedMetric?.value],
-      // asset2Volume: chartData2?.[i]?.volume,
-      // asset2MarketCap: chartData2?.[i]?.marketCap,
     }));
   }, [asset1Label, asset2Label, selectedMetric]);
 
@@ -59,38 +54,46 @@ export default function CryptoChart({
 
   return (
     <div style={{ width: '100%', height: 400 }}>
-      <ResponsiveContainer>
-        <LineChart data={mergedData}>
-          <XAxis dataKey="time" tick={{ fontSize: 12 }} />
-          <YAxis
-            tickFormatter={value => Intl.NumberFormat('en', { notation: 'compact' }).format(value)}
-          />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend />
+      {mergedData && mergedData.length > 0 ? (
+        <ResponsiveContainer>
+          <LineChart data={mergedData}>
+            <XAxis dataKey="time" tick={{ fontSize: 12 }} />
+            <YAxis
+              tickFormatter={value =>
+                Intl.NumberFormat('en', { notation: 'compact' }).format(value)
+              }
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend />
 
-          {/* Always show asset 1 */}
-          <Line
-            type="monotone"
-            dataKey="asset1Price"
-            stroke="#8884d8"
-            strokeWidth={2}
-            name={`${asset1Label} ${selectedMetric?.name}`}
-          />
-
-          {/* Conditionally show asset 2 */}
-          {chartData2 && (
+            {/* Always show asset 1 */}
             <Line
               type="monotone"
-              dataKey="asset2Price"
-              stroke="#FE8DA1"
+              dataKey="asset1Price"
+              stroke="#8884d8"
               strokeWidth={2}
-              name={`${asset2Label} ${selectedMetric?.name}`}
+              name={`${asset1Label} ${selectedMetric?.name}`}
             />
-          )}
 
-          {/* Optional: add volume & market cap lines here */}
-        </LineChart>
-      </ResponsiveContainer>
+            {/* Conditionally show asset 2 */}
+            {chartData2 && (
+              <Line
+                type="monotone"
+                dataKey="asset2Price"
+                stroke="#FE8DA1"
+                strokeWidth={2}
+                name={`${asset2Label} ${selectedMetric?.name}`}
+              />
+            )}
+
+            {/* Optional: add volume & market cap lines here */}
+          </LineChart>
+        </ResponsiveContainer>
+      ) : (
+        <div className="h-full flex items-center justify-center text-gray-500 text-sm border border-dashed border-gray-300 rounded p-4">
+          No data available for this selection.
+        </div>
+      )}
     </div>
   );
 }

@@ -33,15 +33,15 @@ function CryptoNameRenderer({ selectedCoinInfo, chartData }) {
 
 function CryptoChartView({
   chart1Response,
-  selectedCoinInfo1,
+  selectedCoinInfo1 = {},
   chart2Response = {},
   selectedCoinInfo2 = {},
   isLoading,
-  selectedMetric,
-  selectedTimeRange,
+  selectedMetric = {},
+  selectedTimeRange = {},
 }) {
   return (
-    <div className="border border-[#ccc] rounded-sm p-[20px] m-2.5 w-full box-border shadow-lg ">
+    <div className="border border-dashed border-[#ccc] rounded-sm p-[20px] m-2.5 w-full box-border shadow-lg ">
       <div className="flex flex-col gap-2.5">
         <h2 className="text-lg font-semibold ">
           {selectedMetric.name} Over {selectedTimeRange.name}

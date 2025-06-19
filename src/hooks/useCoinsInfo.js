@@ -14,13 +14,41 @@ const useCoinsInfo = () => {
   const [topCoins, setTopCoins] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [getTopCoins] = useLazyGetTopCoinsQuery();
-  const [getCoinsList] = useLazyGetCoinsListQuery();
+  const [getTopCoins, { error: topCoinsError }] = useLazyGetTopCoinsQuery();
+  const [getCoinsList, { error: fetchCoinsError }] = useLazyGetCoinsListQuery();
   const [selectedCoinInfo, setSelectedCoinInfo] = useState();
   const [selectedDays, setSelectedDays] = useState();
   const [selectedCompareCoinInfo, setSelectedCompareCoinInfo] = useState();
   const [selectedMetricInfo, setSelectedMetricInfo] = useState();
   const [selectedTimeRange, setSelectedTimeRange] = useState();
+  const marketChartQueryArgs = useMemo(() => {
+    return selectedCoinInfo?.id ? { id: selectedCoinInfo.id, days: selectedDays || 7 } : skipToken;
+  }, [selectedCoinInfo, selectedDays]);
+
+  const compareChartQueryArgs = useMemo(() => {
+    return selectedCompareCoinInfo?.id
+      ? { id: selectedCompareCoinInfo.id, days: selectedDays || 7 }
+      : skipToken;
+  }, [selectedCompareCoinInfo, selectedDays]);
+
+  const {
+    data: compareChartResponseRaw,
+    isFetching: isCompareChartLoading,
+    error: compareChartError,
+  } = useGetMarketChartQuery(compareChartQueryArgs, {
+    refetchOnMountOrArgChange: false,
+  });
+
+  const {
+    data: chartResponseRaw,
+    isFetching,
+    error: marketChartError,
+  } = useGetMarketChartQuery(marketChartQueryArgs, {
+    refetchOnMountOrArgChange: false,
+  });
+  const chartResponse = marketChartError ? [] : chartResponseRaw || [];
+  const compareChartResponse = compareChartError ? [] : compareChartResponseRaw || [];
+  console.log(compareChartError, marketChartError);
   const fetchTopCoins = async () => {
     const cached = getCache(COINS_CACHE_KEY);
     if (cached) {
@@ -41,6 +69,11 @@ const useCoinsInfo = () => {
   useEffect(() => {
     fetchTopCoins();
   }, []);
+  useEffect(() => {
+    if (fetchCoinsError || marketChartError || topCoinsError || compareChartError) {
+      setError('Error Occured while fetching the data.');
+    }
+  }, [fetchCoinsError, marketChartError, topCoinsError, compareChartError]);
   const loadOptions = async (inputValue, callback) => {
     if (!inputValue) return callback([]);
     const { data } = await getCoinsList({ searchQuery: inputValue });
@@ -54,26 +87,6 @@ const useCoinsInfo = () => {
     callback(options || []);
   };
   const debouncedLoadOptions = useMemo(() => debounce(loadOptions, 500), []);
-  const marketChartQueryArgs = useMemo(() => {
-    return selectedCoinInfo?.id ? { id: selectedCoinInfo.id, days: selectedDays || 7 } : skipToken;
-  }, [selectedCoinInfo, selectedDays]);
-
-  const compareChartQueryArgs = useMemo(() => {
-    return selectedCompareCoinInfo?.id
-      ? { id: selectedCompareCoinInfo.id, days: selectedDays || 7 }
-      : skipToken;
-  }, [selectedCompareCoinInfo, selectedDays]);
-
-  const { data: compareChartResponse, isFetching: isCompareChartLoading } = useGetMarketChartQuery(
-    compareChartQueryArgs,
-    {
-      refetchOnMountOrArgChange: false,
-    }
-  );
-
-  const { data: chartResponse, isFetching } = useGetMarketChartQuery(marketChartQueryArgs, {
-    refetchOnMountOrArgChange: false,
-  });
 
   const handleCoinSelection = coinData => {
     setSelectedCoinInfo(coinData);
