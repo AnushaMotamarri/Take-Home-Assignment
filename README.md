@@ -33,7 +33,7 @@ cd Take-Home-Assignment
 npm install
 ```
 
-### 3. Getting Started
+### 3. Run the App
 
 ```bash
 npm run dev
