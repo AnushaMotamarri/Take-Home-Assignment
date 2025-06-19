@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
-// import { components } from 'react-select';
+import { components } from 'react-select';
 
 const customSingleValue = ({ data }) => (
-  <div className="flex items-center gap-2 p-0 m-0" style={{ margin: 0, padding: 0 }}>
+  <div className="flex items-center gap-2 p-0 m-0"
+  style={{ margin: 0, padding: 0 }}>
     <img src={data.image} alt={data.label} className="w-5 h-5" />
-    <span className="text-text-color">
+    <span className='text-text-color'>
       {data.name} ({data.symbol.toUpperCase()})
     </span>
   </div>
@@ -18,11 +19,12 @@ const CustomOption = props => {
     <div
       ref={innerRef}
       {...innerProps}
+     
       className="flex items-center gap-2 px-3 py-2  bg-background hover:bg-[var(--color-dropdown-hover)] "
     >
-      {data.image && <img src={data.image} alt={data.label} className="w-5 h-5" />}
-      <span className=" text-text-color" data-testid={`coin-name-${data.name}`}>
-        {data.name} {data.symbol && `(${data.symbol?.toUpperCase()})`}
+      {data.image&&<img src={data.image} alt={data.label} className="w-5 h-5" />}
+      <span className=" text-text-color"  data-testid={`coin-name-${data.name}`}>
+        {data.name} {data.symbol&&`(${data.symbol?.toUpperCase()})`}
       </span>
     </div>
   );
@@ -41,44 +43,44 @@ const customStyles = {
       borderColor: 'var(--primary-color)',
     },
   }),
-  singleValue: base => ({
+  singleValue: (base) => ({
     ...base,
     color: 'var(--color-text-color)',
     marginTop: 0,
     marginBottom: 0,
   }),
-  input: base => ({
+  input: (base) => ({
     ...base,
     margin: 0,
     padding: 0,
     color: 'var(--color-text-color)',
   }),
-  valueContainer: base => ({
+  valueContainer: (base) => ({
     ...base,
     display: 'flex',
-    height: '28px',
-    padding: '0 6px',
-    overflow: 'auto',
-    flexWrap: 'nowrap',
+      height: '28px',
+      padding: '0 6px',
+      overflow: 'auto',
+      flexWrap:  'nowrap'
   }),
   option: (base, { isFocused, isSelected }) => ({
     ...base,
     backgroundColor: isSelected
       ? 'var(--primary-color)'
       : isFocused
-        ? 'var(--color-dropdown-hover)'
-        : 'var(--color-background)',
+      ? 'var(--color-dropdown-hover)'
+      : 'var(--color-background)',
     color: 'var(--color-text-color)',
     cursor: 'pointer',
     padding: '10px 12px',
   }),
-  menu: base => ({
+  menu: (base) => ({
     ...base,
     backgroundColor: 'var(--color-background)',
     color: 'var(--color-text-color)',
     zIndex: 20,
   }),
-  placeholder: base => ({
+  placeholder: (base) => ({
     ...base,
     color: 'gray',
   }),
@@ -86,17 +88,15 @@ const customStyles = {
 
 const CustomControl = ({ children, ...props }) => {
   const { selectProps } = props;
-
-  return (
-    <components.Control
-      {...props}
-      innerRef={props.innerRef}
-      innerProps={{ ...props.innerProps, 'data-testid': selectProps.testId || 'crypto-select' }}
-    >
-      {children}
-    </components.Control>
-  );
+  
+ return <components.Control {...props} innerRef={props.innerRef} innerProps={{ ...props.innerProps, 'data-testid': selectProps.testId||'crypto-select' }}
+ 
+ >
+    {children}
+  </components.Control>
 };
+
+
 
 const Dropdown = ({
   label,
@@ -106,7 +106,7 @@ const Dropdown = ({
   onChange,
   placeholder,
   selectFirstOptionByDefault,
-  testId,
+  testId
 }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -122,8 +122,8 @@ const Dropdown = ({
       {label && <label className="font-semibold">{label}</label>}
       {isAsync ? (
         <AsyncSelect
-          styles={customStyles}
-          testId={testId}
+        styles={customStyles}
+        testId={testId}
           placeholder={placeholder}
           cacheOptions
           defaultOptions={options}
@@ -131,15 +131,11 @@ const Dropdown = ({
           getOptionLabel={opt => opt.name}
           getOptionValue={opt => opt.id}
           onChange={onChange}
-          components={{
-            Option: CustomOption,
-            Control: CustomControl,
-            SingleValue: customSingleValue,
-          }}
+          components={{ Option: CustomOption,Control: CustomControl,SingleValue:customSingleValue }}
         />
       ) : (
         <Select
-          styles={customStyles}
+        styles={customStyles}
           className="text-black"
           value={selectedOption}
           options={options}
@@ -148,7 +144,7 @@ const Dropdown = ({
             setSelectedOption(val);
             onChange(val);
           }}
-          components={{ Option: CustomOption, Control: CustomControl }}
+          components={{Option: CustomOption, Control: CustomControl}}
         />
       )}
     </div>
