@@ -22,9 +22,19 @@ Follow these steps to run the project locally:
 
 ### 1. Clone the repository
 
-```bash
+````bash
 git clone https://github.com/AnushaMotamarri/Take-Home-Assignment.git
 cd Take-Home-Assignment
 
 
-```
+### 2. Getting Started
+
+```bash
+npm install
+
+
+### 3. Getting Started
+
+```bash
+npm run dev
+````
