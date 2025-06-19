@@ -39,4 +39,19 @@ const valueToDaysMap = {
   month: 30,
   year: 360,
 };
-export { timeRangeDropdownOptions, valueToDaysMap, metricsDropdownOptions };
+
+const walletColumnConfigs = [
+  {
+    label: 'Name',
+    accessor: 'name',
+  },
+  {
+    label: 'Symbol',
+    accessor: 'symbol',
+  },
+  {
+    label: 'Balance',
+    accessor: 'readableBalance',
+  },
+];
+export { timeRangeDropdownOptions, valueToDaysMap, metricsDropdownOptions, walletColumnConfigs };
