@@ -5,6 +5,10 @@ This is a frontend take-home assignment built using **React** and **Tailwind CSS
 🚀 **Live Demo:** [https://amazing-parfait-26fd5f.netlify.app/](https://amazing-parfait-26fd5f.netlify.app/)
 
 ---
+## Documentation
+
+[https://docs.google.com/document/d/1tL1vVW-71qymFl0YJu49sVSmcxlnHiit5Y_GOX8eAxw/edit?usp=sharing](Documentation)
+
 
 ## 🛠 Tech Stack
 
