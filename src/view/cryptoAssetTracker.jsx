@@ -2,8 +2,8 @@ import React from 'react';
 import Dropdown from '../components/dropdown';
 import { useCoinsInfo } from '../hooks/useCoinsInfo';
 import CryptoChartView from './cryptoChartView';
-import { timeRangeDropdownOptions } from './enums';
-
+import { metricsDropdownOptions, timeRangeDropdownOptions } from './enums';
+import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 function CryptoAssetTracker() {
   const {
     topCoins,
@@ -15,6 +15,12 @@ function CryptoAssetTracker() {
     isChartLoading,
     selectedCoinInfo,
     onTimeRangeChange,
+    handleCompareCoinSelection,
+    compareChartResponse,
+    isCompareChartLoading,
+    selectedCompareCoinInfo,
+    onMetricChange,
+    selectedMetricInfo,
   } = useCoinsInfo();
 
   return (
@@ -28,35 +34,50 @@ function CryptoAssetTracker() {
         <div>{error}</div>
       ) : (
         <div>
-          <Dropdown
-            isAsync
-            options={topCoins}
-            placeholder="Choose a crypto asset"
-            loadOptions={debouncedLoadOptions}
-            onChange={handleCoinSelection}
-            label={'Select Asset'}
-          />
-          <Dropdown
-            options={timeRangeDropdownOptions}
-            label={'Select Time Range'}
-            onChange={onTimeRangeChange}
-          />
-          <Dropdown
-            isAsync
-            options={topCoins}
-            placeholder="Choose a crypto asset"
-            loadOptions={debouncedLoadOptions}
-            onChange={handleCoinSelection}
-            label={'Compare With'}
-          />
+          <div className="flex">
+            <Dropdown
+              isAsync
+              options={topCoins}
+              placeholder="Choose a crypto asset"
+              loadOptions={debouncedLoadOptions}
+              onChange={handleCoinSelection}
+              label={'Asset'}
+            />
+            <CompareArrowsIcon className="mt-10 text-gray-500" />
+            <Dropdown
+              isAsync
+              options={topCoins}
+              placeholder="Choose a crypto asset"
+              loadOptions={debouncedLoadOptions}
+              onChange={handleCompareCoinSelection}
+              label={'Compare With'}
+            />
+          </div>
+          <div className="flex gap-6">
+            <Dropdown
+              options={timeRangeDropdownOptions}
+              label={'Time Range'}
+              onChange={onTimeRangeChange}
+              selectFirstOptionByDefault
+            />
+            <Dropdown
+              options={metricsDropdownOptions}
+              label={'Performance Metric'}
+              onChange={onMetricChange}
+              selectFirstOptionByDefault
+            />
+          </div>
         </div>
       )}
 
       {chartResponse && (
         <CryptoChartView
-          isLoading={isChartLoading}
-          selectedCoinInfo={selectedCoinInfo}
-          chartResponse={chartResponse}
+          isLoading={isChartLoading || isCompareChartLoading}
+          selectedCoinInfo1={selectedCoinInfo}
+          chart1Response={chartResponse}
+          selectedCoinInfo2={selectedCompareCoinInfo}
+          chart2Response={compareChartResponse}
+          selectedMetric={selectedMetricInfo}
         />
       )}
     </div>

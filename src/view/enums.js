@@ -16,9 +16,27 @@ const timeRangeDropdownOptions = [
   },
 ];
 
+const metricsDropdownOptions = [
+  {
+    value: 'price',
+    label: 'Price',
+    name: 'Price',
+  },
+  {
+    value: 'marketCap',
+    label: 'Market Cap',
+    name: 'Market Cap',
+  },
+  {
+    value: 'volume',
+    label: 'Volume',
+    name: 'Volume',
+  },
+];
+
 const valueToDaysMap = {
   week: 7,
   month: 30,
   year: 360,
 };
-export { timeRangeDropdownOptions, valueToDaysMap };
+export { timeRangeDropdownOptions, valueToDaysMap, metricsDropdownOptions };

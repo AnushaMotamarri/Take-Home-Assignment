@@ -18,6 +18,8 @@ const useCoinsInfo = () => {
   const [getCoinsList] = useLazyGetCoinsListQuery();
   const [selectedCoinInfo, setSelectedCoinInfo] = useState();
   const [selectedDays, setSelectedDays] = useState();
+  const [selectedCompareCoinInfo, setSelectedCompareCoinInfo] = useState();
+  const [selectedMetricInfo, setSelectedMetricInfo] = useState();
   const fetchTopCoins = async () => {
     const cached = getCache(COINS_CACHE_KEY);
     if (cached) {
@@ -54,16 +56,37 @@ const useCoinsInfo = () => {
   const marketChartQueryArgs = useMemo(() => {
     return selectedCoinInfo?.id ? { id: selectedCoinInfo.id, days: selectedDays || 7 } : skipToken;
   }, [selectedCoinInfo, selectedDays]);
+
+  const compareChartQueryArgs = useMemo(() => {
+    return selectedCompareCoinInfo?.id
+      ? { id: selectedCompareCoinInfo.id, days: selectedDays || 7 }
+      : skipToken;
+  }, [selectedCompareCoinInfo, selectedDays]);
+
+  const { data: compareChartResponse, isFetching: isCompareChartLoading } = useGetMarketChartQuery(
+    compareChartQueryArgs,
+    {
+      refetchOnMountOrArgChange: false,
+    }
+  );
+
   const { data: chartResponse, isFetching } = useGetMarketChartQuery(marketChartQueryArgs, {
     refetchOnMountOrArgChange: false,
   });
 
-  const handleCoinSelection = async coinData => {
+  const handleCoinSelection = coinData => {
     setSelectedCoinInfo(coinData);
   };
 
+  const handleCompareCoinSelection = coinData => {
+    setSelectedCompareCoinInfo(coinData);
+  };
   const onTimeRangeChange = doc => {
     if (doc?.value) setSelectedDays(valueToDaysMap[doc?.value]);
+  };
+
+  const onMetricChange = doc => {
+    setSelectedMetricInfo(doc);
   };
   return {
     topCoins,
@@ -75,6 +98,12 @@ const useCoinsInfo = () => {
     isChartLoading: isFetching,
     selectedCoinInfo,
     onTimeRangeChange,
+    handleCompareCoinSelection,
+    compareChartResponse,
+    isCompareChartLoading,
+    selectedCompareCoinInfo,
+    onMetricChange,
+    selectedMetricInfo,
   };
 };
 

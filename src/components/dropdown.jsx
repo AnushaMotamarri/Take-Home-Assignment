@@ -1,8 +1,15 @@
 // VirtualizedSelect.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
-
+const customSingleValue = ({ data }) => (
+  <div className="flex items-center gap-2">
+    <img src={data.image} alt={data.label} className="w-5 h-5" />
+    <span>
+      {data.name} ({data.symbol.toUpperCase()})
+    </span>
+  </div>
+);
 const CustomOption = props => {
   const { data, innerRef, innerProps } = props;
   return (
@@ -19,14 +26,26 @@ const CustomOption = props => {
   );
 };
 
-const Dropdown = ({ label, isAsync, options, loadOptions, onChange }) => {
+const Dropdown = ({
+  label,
+  isAsync,
+  options,
+  loadOptions,
+  onChange,
+  selectFirstOptionByDefault,
+}) => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  useEffect(() => {
+    if (selectFirstOptionByDefault) {
+      const defaultOption = options[0]; // select BTC by default
+      setSelectedOption(defaultOption);
+      onChange?.(defaultOption); // trigger callback
+    }
+  }, []);
   return (
     <div className="w-[300px] p-[10px]">
-      {label && (
-        <label>
-          <b>{label}:</b>
-        </label>
-      )}
+      {label && <label className="font-semibold">{label}</label>}
       {isAsync ? (
         <AsyncSelect
           cacheOptions
@@ -35,10 +54,17 @@ const Dropdown = ({ label, isAsync, options, loadOptions, onChange }) => {
           getOptionLabel={opt => opt.name}
           getOptionValue={opt => opt.id}
           onChange={onChange}
-          components={{ Option: CustomOption }}
+          components={{ Option: CustomOption, SingleValue: customSingleValue }}
         />
       ) : (
-        <Select options={options} onChange={onChange} />
+        <Select
+          value={selectedOption}
+          options={options}
+          onChange={val => {
+            setSelectedOption(val);
+            onChange(val);
+          }}
+        />
       )}
     </div>
   );
