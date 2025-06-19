@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
-// import { components } from 'react-select';
+import { components } from 'react-select';
 
 const customSingleValue = ({ data }) => (
   <div className="flex items-center gap-2 p-0 m-0" style={{ margin: 0, padding: 0 }}>
