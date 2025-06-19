@@ -7,7 +7,7 @@ This is a frontend take-home assignment built using **React** and **Tailwind CSS
 ---
 ## Documentation
 
-[https://docs.google.com/document/d/1tL1vVW-71qymFl0YJu49sVSmcxlnHiit5Y_GOX8eAxw/edit?usp=sharing](Documentation)
+[https://docs.google.com/document/d/1tL1vVW-71qymFl0YJu49sVSmcxlnHiit5Y_GOX8eAxw/edit?usp=sharing](https://docs.google.com/document/d/1tL1vVW-71qymFl0YJu49sVSmcxlnHiit5Y_GOX8eAxw/edit?usp=sharing)
 
 
 ## 🛠 Tech Stack
