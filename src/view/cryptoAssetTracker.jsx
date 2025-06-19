@@ -28,9 +28,9 @@ function CryptoAssetTracker() {
       <h2 className="text-xl p-[10px] text-text-color">
         <b>Crypto Performance Viewer</b>
         <p className="text-sm py-1">
-          Compare historical performance of top cryptocurrencies across various time ranges. Select
-          one or two assets to visualize price, volume, or market cap trends with interactive
-          charts.
+          Compare historical performance of top cryptocurrencies across various time ranges. Type
+          and select one or two assets to visualize price, volume, or market cap trends with
+          interactive charts.
         </p>
       </h2>
       {loading ? (
