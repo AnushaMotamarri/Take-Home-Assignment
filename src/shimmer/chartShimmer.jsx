@@ -1,6 +1,6 @@
 const ChartShimmer = () => {
   return (
-    <div className="w-full h-[400px] p-4 border border-gray-200 rounded-md bg-white animate-pulse flex flex-col justify-between">
+    <div className="w-full h-[400px] p-4 border border-gray-200 rounded-md bg-background animate-pulse flex flex-col justify-between">
       {/* Y-axis lines */}
       {[...Array(5)].map((_, i) => (
         <div key={i} className="w-full h-1 relative">

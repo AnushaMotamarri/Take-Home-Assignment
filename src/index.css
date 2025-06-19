@@ -17,6 +17,7 @@
   --text-color: #333;
   --color-black: #333;
   --primary-color: #625afc;
+  --dropdown-hover-color: #e0e0e0;
 }
 
 .dark {
@@ -24,12 +25,14 @@
   --text-color: #fff;
   --color-black: #333;
   --primary-color: #b388ff;
+  --dropdown-hover-color: #202020;
 }
 @theme {
   --color-background: var(--background-color);
   --color-text-color: var(--text-color);
   --color-black: var(--color-black);
   --color-primary: var(--primary-color);
+  --color-dropdown-hover: var(--dropdown-hover-color);
 }
 a {
   font-weight: 500;
