@@ -21,11 +21,12 @@ function CryptoAssetTracker() {
     selectedCompareCoinInfo,
     onMetricChange,
     selectedMetricInfo,
+    selectedTimeRange,
   } = useCoinsInfo();
 
   return (
     <div>
-      <h2 className="text-xl p-[10px]">
+      <h2 className="text-xl p-[10px] text-text-color">
         <b>Crypto Performance Viewer</b>
       </h2>
       {loading ? (
@@ -34,20 +35,19 @@ function CryptoAssetTracker() {
         <div>{error}</div>
       ) : (
         <div>
-          <div className="flex">
+          <div className="flex gap-6">
             <Dropdown
               isAsync
               options={topCoins}
-              placeholder="Choose a crypto asset"
+              placeholder="Type in your Asset"
               loadOptions={debouncedLoadOptions}
               onChange={handleCoinSelection}
               label={'Asset'}
             />
-            <CompareArrowsIcon className="mt-10 text-gray-500" />
             <Dropdown
               isAsync
               options={topCoins}
-              placeholder="Choose a crypto asset"
+              placeholder="Type in your Asset"
               loadOptions={debouncedLoadOptions}
               onChange={handleCompareCoinSelection}
               label={'Compare With'}
@@ -78,6 +78,7 @@ function CryptoAssetTracker() {
           selectedCoinInfo2={selectedCompareCoinInfo}
           chart2Response={compareChartResponse}
           selectedMetric={selectedMetricInfo}
+          selectedTimeRange={selectedTimeRange}
         />
       )}
     </div>

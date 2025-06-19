@@ -3,12 +3,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import TimelineIcon from '@mui/icons-material/Timeline';
 export default function Navbar({ theme, setTheme }) {
   const navigate = useNavigate();
   return (
-    <nav className="p-[15px] flex border-b border-[#ccc]">
+    <nav className="p-[15px] bg-purple-500 text-white flex border-b border-purple-500">
       <div onClick={() => navigate('')} className="app-title">
-        Crypto Asset Tracker
+        <TimelineIcon /> <span className="font-semibold">Crypto Asset Tracker</span>
       </div>
       <div
         className="theme ml-auto text-base"

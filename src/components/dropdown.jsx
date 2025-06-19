@@ -2,14 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
-const customSingleValue = ({ data }) => (
-  <div className="flex items-center gap-2">
-    <img src={data.image} alt={data.label} className="w-5 h-5" />
-    <span>
-      {data.name} ({data.symbol.toUpperCase()})
-    </span>
-  </div>
-);
+// const customSingleValue = ({ data }) => (
+//   <div className="flex items-center gap-2 p-0 m-0"
+//   style={{ margin: 0, padding: 0 }}>
+//     <img src={data.image} alt={data.label} className="w-5 h-5" />
+//     <span className='text-black'>
+//       {data.name} ({data.symbol.toUpperCase()})
+//     </span>
+//   </div>
+// );
 const CustomOption = props => {
   const { data, innerRef, innerProps } = props;
   return (
@@ -19,7 +20,7 @@ const CustomOption = props => {
       className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100"
     >
       <img src={data.image} alt={data.label} className="w-5 h-5" />
-      <span>
+      <span className="text-black">
         {data.name} ({data.symbol.toUpperCase()})
       </span>
     </div>
@@ -32,6 +33,7 @@ const Dropdown = ({
   options,
   loadOptions,
   onChange,
+  placeholder,
   selectFirstOptionByDefault,
 }) => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -48,16 +50,18 @@ const Dropdown = ({
       {label && <label className="font-semibold">{label}</label>}
       {isAsync ? (
         <AsyncSelect
+          placeholder={placeholder}
           cacheOptions
           defaultOptions={options}
           loadOptions={loadOptions}
           getOptionLabel={opt => opt.name}
           getOptionValue={opt => opt.id}
           onChange={onChange}
-          components={{ Option: CustomOption, SingleValue: customSingleValue }}
+          components={{ Option: CustomOption }}
         />
       ) : (
         <Select
+          className="text-black"
           value={selectedOption}
           options={options}
           onChange={val => {

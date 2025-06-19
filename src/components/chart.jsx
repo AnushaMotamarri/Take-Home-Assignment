@@ -39,7 +39,7 @@ export default function CryptoChart({
       };
 
       return (
-        <div className="border border-[#ccc] bg-gray-50 p-[10px] rounded-xl">
+        <div className="border border-[#ccc] bg-background p-[10px] rounded-xl">
           <p className="font-semibold">{label}</p>
           {payload.map((p, idx) => {
             const initial = first?.[p.dataKey];
@@ -82,7 +82,7 @@ export default function CryptoChart({
             <Line
               type="monotone"
               dataKey="asset2Price"
-              stroke="#a6e1fa"
+              stroke="#FE8DA1"
               strokeWidth={2}
               name={`${asset2Label} ${selectedMetric?.name}`}
             />

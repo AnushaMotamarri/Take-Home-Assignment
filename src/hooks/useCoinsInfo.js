@@ -20,6 +20,7 @@ const useCoinsInfo = () => {
   const [selectedDays, setSelectedDays] = useState();
   const [selectedCompareCoinInfo, setSelectedCompareCoinInfo] = useState();
   const [selectedMetricInfo, setSelectedMetricInfo] = useState();
+  const [selectedTimeRange, setSelectedTimeRange] = useState();
   const fetchTopCoins = async () => {
     const cached = getCache(COINS_CACHE_KEY);
     if (cached) {
@@ -82,12 +83,16 @@ const useCoinsInfo = () => {
     setSelectedCompareCoinInfo(coinData);
   };
   const onTimeRangeChange = doc => {
-    if (doc?.value) setSelectedDays(valueToDaysMap[doc?.value]);
+    if (doc?.value) {
+      setSelectedTimeRange(doc);
+      setSelectedDays(valueToDaysMap[doc?.value]);
+    }
   };
 
   const onMetricChange = doc => {
     setSelectedMetricInfo(doc);
   };
+
   return {
     topCoins,
     loading,
@@ -104,6 +109,7 @@ const useCoinsInfo = () => {
     selectedCompareCoinInfo,
     onMetricChange,
     selectedMetricInfo,
+    selectedTimeRange,
   };
 };
 
