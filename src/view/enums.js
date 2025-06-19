@@ -1,17 +1,17 @@
 const timeRangeDropdownOptions = [
   {
-    value: 'week', // actual value returned on selection
-    label: 'Last 7 Days', // visible label in dropdown
-    name: 'Last 7 Days', // used by getOptionLabel (fallback)
+    value: 'week',
+    label: 'Last 7 Days',
+    name: 'Last 7 Days',
   },
   {
-    value: 'month', // actual value returned on selection
-    label: 'Last 1 Month', // visible label in dropdown
+    value: 'month',
+    label: 'Last 1 Month',
     name: 'Last 1 Month',
   },
   {
-    value: 'year', // actual value returned on selection
-    label: 'Last 1 Year', // visible label in dropdown
+    value: 'year',
+    label: 'Last 1 Year',
     name: 'Last 1 Year',
   },
 ];

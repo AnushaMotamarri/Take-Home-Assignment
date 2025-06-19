@@ -3,12 +3,11 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } f
 
 export default function CryptoChart({
   chartData1,
-  chartData2 = null, // optional
+  chartData2 = null,
   asset1Label,
   asset2Label = '',
   selectedMetric,
 }) {
-  // Merge chart data safely
   const mergedData = useMemo(() => {
     return chartData1?.map((entry, i) => ({
       time: entry.time,

@@ -1,4 +1,3 @@
-// services/cryptoApi.js
 import { createBaseApi } from '../rtkQuery/createBaseApi';
 import { transformChartData } from '../utils/common_utils';
 
@@ -16,7 +15,6 @@ cryptoApi.injectEndpoints({
       query: ({ id, days }) =>
         `coins/${id}/market_chart?vs_currency=usd&days=${days}&interval=daily`,
       transformResponse: response => {
-        // Example transformation: Convert [timestamp, price] to objects
         return transformChartData(response);
       },
     }),

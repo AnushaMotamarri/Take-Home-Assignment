@@ -8,7 +8,7 @@ import { store } from './rtkQuery/store';
 function AppRoutes({ theme, setTheme }) {
   const element = useRoutes(
     routes.map(route =>
-      route.path === '/' // apply theme props to layout if needed
+      route.path === '/'
         ? {
             ...route,
             element: React.cloneElement(route.element, { theme, setTheme }),

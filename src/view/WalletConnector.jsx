@@ -1,4 +1,3 @@
-// components/WalletConnector.jsx
 import { useEffect, useState } from 'react';
 import useWallet from '../hooks/useWallet';
 
