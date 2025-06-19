@@ -1,4 +1,3 @@
-// VirtualizedSelect.js
 import React, { useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
