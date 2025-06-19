@@ -13,8 +13,8 @@ function transformChartData(data) {
     return {
       time: date,
       price: price,
-      marketCap: data.market_caps[index]?.[1],
-      volume: data.total_volumes[index]?.[1],
+      marketCap: data.market_caps?.[index]?.[1],
+      volume: data.total_volumes?.[index]?.[1],
     };
   });
 }

@@ -7,7 +7,7 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 export default function Navbar({ theme, setTheme }) {
   const navigate = useNavigate();
   return (
-    <nav className="p-[15px] bg-purple-500 text-white flex border-b border-purple-500">
+    <nav className="p-[15px] bg-primary text-white flex border-b border-primary">
       <div onClick={() => navigate('')} className="app-title">
         <TimelineIcon /> <span className="font-semibold">Crypto Asset Tracker</span>
       </div>
