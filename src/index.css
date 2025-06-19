@@ -19,6 +19,7 @@
   --primary-color: #625afc;
   --dropdown-hover-color: #e0e0e0;
   --table-header-background-color: #f0f0f5;
+  --header-height: 57px;
 }
 
 .dark {
@@ -51,6 +52,7 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
   color: var(--text-color);
 }
 
