@@ -5,7 +5,7 @@ export default function Layout({ theme, setTheme }) {
   return (
     <div className="bg-background h-screen">
       <Navbar theme={theme} setTheme={setTheme} />
-      <div className="px-5 pt-2.5 h-[calc(100vh-var(--header-height))]">
+      <div className="px-5 pt-2.5 h-[calc(100vh-var(--header-height))] overflow-auto">
         <Outlet />
       </div>
     </div>

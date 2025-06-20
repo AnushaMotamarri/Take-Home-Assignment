@@ -17,7 +17,7 @@ const CustomOption = props => {
     <div
       ref={innerRef}
       {...innerProps}
-      className={`flex items-center gap-2 px-3 py-2  hover:bg-[var(--color-dropdown-hover)] ${isFocused ? 'bg-[var(--color-dropdown-hover)]' : 'bg-background '}`}
+      className={`flex items-center gap-2 px-3 py-2 hover:bg-[var(--color-dropdown-hover)] ${isFocused ? 'bg-[var(--color-dropdown-hover)]' : 'bg-background '}`}
     >
       {data.image && <img src={data.image} alt={data.label} className="w-5 h-5" />}
       <span className=" text-text-color" data-testid={`coin-name-${data.name}`}>
