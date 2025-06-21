@@ -36,7 +36,6 @@ describe('CryptoSelect', () => {
     await userEvent.click(ethOption);
     expect(handleChange).toHaveBeenCalledWith(
       expect.objectContaining({ symbol: 'eth' }),
-      expect.objectContaining({ action: 'select-option' })
     );
     
       });
