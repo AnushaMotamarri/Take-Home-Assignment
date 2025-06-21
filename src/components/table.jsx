@@ -8,7 +8,7 @@ const Row = ({ index, style, data }) => {
     <div style={style} className="flex p-2 border-b border-gray-200">
       {tableConfigs?.map((config, idx) => (
         <div className="w-1/3" key={`row-${idx}`}>
-          {token[config.accessor]}
+          {config.cellRenderer ? config.cellRenderer(token) : token[config.accessor]}
         </div>
       ))}
     </div>

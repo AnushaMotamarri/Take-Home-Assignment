@@ -2,25 +2,9 @@ import useWallet from '../hooks/useWallet';
 import Table from '../components/table';
 import { walletColumnConfigs } from './enums';
 import React from 'react';
-import { useGetWalletInfoByBlockChainQuery } from '../services/walletApi';
-import { skipToken } from '@reduxjs/toolkit/query';
-const walletId = import.meta.env.VITE_WALLET_ID;
+
 export default function WalletConnector() {
-  const { account, connectWallet, error } = useWallet();
-  const {
-    data: tokens = [],
-    isFetching,
-    isError,
-    error: queryError,
-  } = useGetWalletInfoByBlockChainQuery(
-    account ? { walletId: walletId, blockChain: 'eth' } : skipToken
-  );
-
-  const formattedTokens = tokens.map(token => ({
-    ...token,
-    readableBalance: Number(token.balance) / 10 ** token.decimals,
-  }));
-
+  const { account, connectWallet, error, totalBalance, isLoading, enrichedTokens } = useWallet();
   return (
     <div className="p-4">
       <h2 className="text-xl xtext-text-color">
@@ -28,8 +12,8 @@ export default function WalletConnector() {
       </h2>
       <p className="text-sm py-1">
         Connect your self-custody wallet like MetaMask or Trust Wallet to view and monitor your
-        ERC-20 token holdings in real-time. Instantly see your token balances, symbol, and asset
-        details fetched from the blockchain.
+        valid ERC-20 token holdings in real-time. Instantly see your token balances, symbol, and
+        asset details fetched from the blockchain.
       </p>
       <div>
         <span className="text-sm py-1">
@@ -42,12 +26,18 @@ export default function WalletConnector() {
           <p className="text-green-600">
             Connected: {account.slice(0, 6)}...{account.slice(-4)}
           </p>
-          {isFetching ? (
+          {isLoading ? (
             <p>Loading tokens...</p>
-          ) : isError ? (
-            <p className="text-red-600">Error: {queryError?.message}</p>
+          ) : error ? (
+            <p className="text-red-600">Error: {error?.message || error?.data?.message}</p>
           ) : (
-            <Table tokens={formattedTokens} tableConfigs={walletColumnConfigs} />
+            <div>
+              <div className="my-5">
+                <b>Your Total ETH Balance:</b>{' '}
+                <span className="text-green-600">{totalBalance} USD</span>
+              </div>
+              <Table tokens={enrichedTokens} tableConfigs={walletColumnConfigs} />
+            </div>
           )}
         </div>
       ) : (
@@ -55,8 +45,6 @@ export default function WalletConnector() {
           Connect Wallet
         </button>
       )}
-
-      {error && <p className="text-red-600 mt-2">{error}</p>}
     </div>
   );
 }

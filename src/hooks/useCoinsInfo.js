@@ -48,7 +48,6 @@ const useCoinsInfo = () => {
   });
   const chartResponse = marketChartError ? [] : chartResponseRaw || [];
   const compareChartResponse = compareChartError ? [] : compareChartResponseRaw || [];
-  console.log(compareChartError, marketChartError);
   const fetchTopCoins = async () => {
     const cached = getCache(COINS_CACHE_KEY);
     if (cached) {

@@ -37,21 +37,29 @@ const metricsDropdownOptions = [
 const valueToDaysMap = {
   week: 7,
   month: 30,
-  year: 360,
+  year: 365,
 };
 
 const walletColumnConfigs = [
   {
     label: 'Name',
     accessor: 'name',
+    cellRenderer: row => {
+      return `${row.name} (${row.symbol})`;
+    },
   },
+
   {
-    label: 'Symbol',
-    accessor: 'symbol',
+    label: 'Value (USD)',
+    accessor: 'usdPrice',
   },
   {
     label: 'Balance',
     accessor: 'readableBalance',
+  },
+  {
+    label: 'Balance (USD)',
+    accessor: 'usdValue',
   },
 ];
 export { timeRangeDropdownOptions, valueToDaysMap, metricsDropdownOptions, walletColumnConfigs };
