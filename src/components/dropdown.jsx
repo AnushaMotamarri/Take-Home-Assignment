@@ -113,11 +113,11 @@ const Dropdown = ({
 
   useEffect(() => {
     if (selectFirstOptionByDefault) {
-      const defaultOption = options[0]; // select BTC by default
+      const defaultOption = options[0];
       setSelectedOption(defaultOption);
       onChange?.(defaultOption); // trigger callback
     }
-  }, []);
+  }, [selectFirstOptionByDefault,options]);
   return (
     <div className="w-[300px] p-[10px]">
       {label && <label className="font-semibold">{label}</label>}
@@ -131,7 +131,11 @@ const Dropdown = ({
           loadOptions={loadOptions}
           getOptionLabel={opt => opt.name}
           getOptionValue={opt => opt.id}
-          onChange={onChange}
+          onChange={val => {
+            setSelectedOption(val);
+            onChange(val);
+          }}
+          value={selectedOption}
           components={{
             Option: CustomOption,
             Control: CustomControl,

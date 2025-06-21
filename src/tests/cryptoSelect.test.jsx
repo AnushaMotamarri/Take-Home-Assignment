@@ -102,7 +102,6 @@ describe('CryptoSelect', () => {
       
         const option = await screen.findByText('price', { exact: false });
 
-        console.log(option)
         await userEvent.click(option);
     
         expect(handleChange).toHaveBeenCalledWith(expect.objectContaining({ value: 'price' }));
