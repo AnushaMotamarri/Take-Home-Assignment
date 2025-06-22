@@ -5,6 +5,7 @@ import React from 'react';
 
 export default function WalletConnector() {
   const { account, connectWallet, error, totalBalance, isLoading, enrichedTokens } = useWallet();
+  console.log(error);
   return (
     <div className="p-4">
       <h2 className="text-xl xtext-text-color">
@@ -29,7 +30,9 @@ export default function WalletConnector() {
           {isLoading ? (
             <p>Loading tokens...</p>
           ) : error ? (
-            <p className="text-red-600">Error: {error?.message || error?.data?.message}</p>
+            <p className="text-red-600">
+              Error: {typeof error === 'string' ? error : error?.message || error?.data?.message}
+            </p>
           ) : (
             <div>
               <div className="my-5">
@@ -41,9 +44,12 @@ export default function WalletConnector() {
           )}
         </div>
       ) : (
-        <button onClick={connectWallet} className="!bg-primary my-2 text-white px-4 py-2 rounded">
-          Connect Wallet
-        </button>
+        <div>
+          <button onClick={connectWallet} className="!bg-primary my-2 text-white px-4 py-2 rounded">
+            Connect Wallet
+          </button>
+          {error && <p className="text-red-600">{error}</p>}
+        </div>
       )}
     </div>
   );
